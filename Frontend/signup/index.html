@@ -642,7 +642,7 @@
                 <button type="submit" id="signupButton" class="form-button" disabled>Sign Up</button>
             </form>
             <div class="links">
-                <a href="http://54.166.206.245:8006/">Already have an account? Login</a>
+                <a href="http://44.202.158.175:8635/">Already have an account? Login</a>
             </div>
         </div>
     </div>
@@ -812,7 +812,7 @@ async function validateEmail() {
             errorElement.style.color = '#0077ff';
             errorElement.style.fontWeight = 'normal';
             
-            const response = await fetch('http://54.166.206.245:3005/check-email-data', {
+            const response = await fetch('http://44.202.158.175:3628/check-email-data', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
@@ -970,7 +970,7 @@ async function validateEmail() {
                 signupButton.disabled = true;
                 signupButton.textContent = 'Signing Up...';
                 
-                const response = await fetch('http://54.166.206.245:3005/api/signup', {
+                const response = await fetch('http://44.202.158.175:3628/api/signup', {
                     method: 'POST',
                     body: formData
                 });
@@ -979,7 +979,7 @@ async function validateEmail() {
                 if (data.message) {
                     showAlert('success', data.message);
                     setTimeout(() => {
-                        window.location.href = 'http://54.166.206.245:8006';
+                        window.location.href = 'http://44.202.158.175:8635';
                     }, 3000);
                 } else {
                     document.getElementById('confirm-password-error').textContent = data.error || 'Signup failed';

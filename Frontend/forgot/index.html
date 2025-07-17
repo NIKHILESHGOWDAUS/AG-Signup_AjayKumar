@@ -618,7 +618,7 @@
                 <button type="submit" id="resetPasswordBtn" class="form-button" disabled>Reset Password</button>
             </form>
             <div class="links">
-                <a href="http://54.166.206.245:8006/">Back to Login</a>
+                <a href="http://44.202.158.175:8635/">Back to Login</a>
             </div>
         </div>
 
@@ -696,7 +696,7 @@
             }
 
             try {
-                const response = await fetch('http://54.166.206.245:3005/check-email-data', {
+                const response = await fetch('http://44.202.158.175:3628/check-email-data', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email })
@@ -812,7 +812,7 @@
             const confirmNewPassword = document.getElementById('confirmNewPassword').value;
             
             try {
-                const response = await fetch('http://54.166.206.245:3005/api/forgot', {
+                const response = await fetch('http://44.202.158.175:3628/api/forgot', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, newPassword, confirmNewPassword })
@@ -822,7 +822,7 @@
                 if (data.message) {
                     showAlert('success', data.message);
                     setTimeout(() => {
-                        window.location.href = 'http://54.166.206.245:8006/';
+                        window.location.href = 'http://44.202.158.175:8635/';
                     }, 3000);
                 } else {
                     document.getElementById('confirm-password-error').textContent = data.error || 'Password reset failed';

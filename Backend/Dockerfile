@@ -27,7 +27,7 @@ COPY wait-for-postgres.sh .
 RUN chmod +x wait-for-postgres.sh
 
 # Expose port
-EXPOSE 3005
+EXPOSE 3628
 
 # Start the application with wait script
 CMD ["./wait-for-postgres.sh", "postgres", "5434", "node", "server.js"]
