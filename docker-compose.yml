@@ -28,43 +28,37 @@ services:
   backend:
     build:
       context: ./Backend
+    container_name: backend_service
     ports:
       - "3628:3628"
-    environment:
-      - NODE_ENV=production
-      - PORT=3628
-      - DB_HOST=postgres
-      - DB_USER=postgres
-      - DB_NAME=auth_db
-      - DB_PASSWORD=admin123
-      - DB_PORT=5432
-      - FRONTEND_URL=http://54.166.206.245:8634
+    env_file:
+      - ./Backend/server.env  # ✅ cleaner way to load environment variables
     volumes:
       - ./Backend:/app
-      - ./Backend/server.env:/app/server.env
     depends_on:
       postgres:
         condition: service_healthy
     networks:
       - app-network
-    command: ["./wait-for-postgres.sh", "node", "server.js"]
+    command: ["sh", "-c", "./wait-for-postgres.sh && node server.js"]
 
   postgres:
     image: postgres:14
+    container_name: postgres_db
     ports:
       - "5634:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=admin123
       - POSTGRES_DB=auth_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 10
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
 
