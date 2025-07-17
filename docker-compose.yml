@@ -32,7 +32,7 @@ services:
       - "3628:3628"
     environment:
       - NODE_ENV=production
-      - PORT=3005
+      - PORT=3628
       - DB_HOST=postgres
       - DB_USER=postgres
       - DB_NAME=auth_db
